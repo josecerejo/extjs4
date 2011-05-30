@@ -82,6 +82,10 @@ Ext.ux.form.XDateField = Ext.extend(Ext.form.DateField, {
 }); // end of extend
 
 // register xtype
-Ext.reg('xdatefield', Ext.ux.form.XDateField);
+//Ext.reg('xdatefield', Ext.ux.form.XDateField);
+Ext.define('Ext.ux.form.XDateField', {
+    extend: 'Ext.form.DateField',
+    alias: 'widget.XDateField'
+});
 
 // eof
