@@ -26,8 +26,8 @@
     var store = Ext.create('Ext.data.Store', {
       fields: [ 'id', 'text1', 'radio1' ],
       data: [
-        { id: 1, text1: 'text1',  radio1: 'C1' },
-        { id: 2, text1: 'text2',  radio1: 'C2' },
+        { id: 1, text1: 'text2',  radio1: 'C2' },
+        { id: 2, text1: 'text1',  radio1: 'C1' },
         { id: 3, text1: 'text3',  radio1: 'C3' },
       ]
     });
@@ -39,8 +39,10 @@
       items: [
         { xtype: 'textfield', fieldLabel: 'Text', name: 'text1' },
         { xtype: 'radiogroup', fieldLabel: 'Radiogroup',
-          items: [ { boxLabel: 'choice1', name: 'radio1', inputValue: 'C1' },
-                   { boxLabel: 'choice2', name: 'radio1', inputValue: 'C2' } ]
+          items: [
+            { boxLabel: 'choice1', name: 'radio1', inputValue: 'C1' },
+            { boxLabel: 'choice2', name: 'radio1', inputValue: 'C2' },
+          ]
         },
       ],
     });
@@ -55,9 +57,10 @@
         { text: 'Next',
           handler: function(button, event) {
             if (++currentId > 3) { currentId = 1; }
+            form.getForm().reset();
             form.loadRecord(store.getById(currentId));
             //Ext.defer(function() { alert('formDirty=' + form.getForm().isDirty()); }, 500);
-            alert('formDirty=' + form.getForm().isDirty());
+            //alert('formDirty=' + form.getForm().isDirty());
           }
         },
       ]
