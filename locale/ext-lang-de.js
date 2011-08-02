@@ -100,6 +100,7 @@ Ext.onReady(function() {
         Ext.Date.getShortDayName = function(day) {
             return Ext.Date.dayNames[day].substring(0, 3);
         };
+        Ext.Date.defaultFormat = "d.m.Y";
     }
     if(Ext.MessageBox){
         Ext.MessageBox.buttonText = {
