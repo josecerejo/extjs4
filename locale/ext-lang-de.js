@@ -102,6 +102,7 @@ Ext.onReady(function() {
         };
         Ext.Date.defaultFormat = "d.m.Y";
     }
+
     if(Ext.MessageBox){
         Ext.MessageBox.buttonText = {
             ok     : "OK",
@@ -191,7 +192,8 @@ Ext.onReady(function() {
             maxText           : "Das Datum in diesem Feld muss vor dem {0} liegen",
             invalidText       : "{0} ist kein gültiges Datum - es muss im Format {1} eingegeben werden",
             format            : "d.m.Y",
-            altFormats        : "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j"
+            altFormats        : "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j",
+            startDay          : 1
         });
     }
 
@@ -352,7 +354,7 @@ Ext.onReady(function() {
 
     if(Ext.form.CheckboxGroup){
         Ext.apply(Ext.form.CheckboxGroup.prototype, {
-            blankText : "Du mußt mehr als einen Eintrag aus der Gruppe auswählen"
+            blankText : "Du mußt einen Eintrag aus der Gruppe auswählen"
         });
     }
 
