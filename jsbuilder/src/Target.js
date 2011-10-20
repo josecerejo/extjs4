@@ -177,7 +177,7 @@ Target = Ext.extend(Object, {
 
 
 
-            file.writeln('\n// File: ' + jsbDir + path + '\n' + content);
+            file.writeln('// -----\n// File: ' + path + '\n' + content);
         }, this);
     },
 
