@@ -100,9 +100,7 @@ Ext.onReady(function() {
         Ext.Date.getShortDayName = function(day) {
             return Ext.Date.dayNames[day].substring(0, 3);
         };
-        Ext.Date.defaultFormat = "d.m.Y";
     }
-
     if(Ext.MessageBox){
         Ext.MessageBox.buttonText = {
             ok     : "OK",
@@ -110,6 +108,13 @@ Ext.onReady(function() {
             yes    : "Ja",
             no     : "Nein"
         };
+        
+        // As of 4.0.4, setting the buttonText above does not take effect properly. This should be removable in 4.1.0
+        // (see issue EXTJSIV-3909)
+        Ext.MessageBox.msgButtons['ok'].text = Ext.MessageBox.buttonText.ok;
+        Ext.MessageBox.msgButtons['cancel'].text = Ext.MessageBox.buttonText.cancel;
+        Ext.MessageBox.msgButtons['yes'].text = Ext.MessageBox.buttonText.yes;
+        Ext.MessageBox.msgButtons['no'].text = Ext.MessageBox.buttonText.no;
     }
 
     if(Ext.util.Format){
@@ -192,15 +197,16 @@ Ext.onReady(function() {
             maxText           : "Das Datum in diesem Feld muss vor dem {0} liegen",
             invalidText       : "{0} ist kein gültiges Datum - es muss im Format {1} eingegeben werden",
             format            : "d.m.Y",
-            altFormats        : "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j",
-            startDay          : 1
+            altFormats        : "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j"
         });
     }
 
     if(Ext.form.field.ComboBox){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
-            loadingText       : "Lade Daten ...",
             valueNotFoundText : undefined
+        });
+        Ext.apply(Ext.form.field.ComboBox.prototype.defaultListConfig, {
+            loadingText       : "Lade Daten ..."
         });
     }
 
@@ -354,7 +360,7 @@ Ext.onReady(function() {
 
     if(Ext.form.CheckboxGroup){
         Ext.apply(Ext.form.CheckboxGroup.prototype, {
-            blankText : "Du mußt einen Eintrag aus der Gruppe auswählen"
+            blankText : "Du mußt mehr als einen Eintrag aus der Gruppe auswählen"
         });
     }
 
