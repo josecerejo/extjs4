@@ -42,10 +42,11 @@ Ext.define('App.view.Window', {
   //   following line of code works only for FIRST instance created with Ext.create('App.view.Window')
   //   the second instance is empty (form is here but looses its items!)
   //   extjs 4.0.7  (with 4.0.2a i got an 80004003 error)
-  // items: [ Ext.create('App.view.Form') ],
-  // items: [ { xtype: 'myform' } ],  // this works as expected
+  items: [ Ext.create('App.view.Form') ],  // full comment see above
+  // items: [ { xtype: 'myform' } ],  // ---> this works as expected
   // items: [ Ext.create('Ext.form.Panel', formDef1) ],  // this works only once like: Ext.create('App.view.Form')
-  items: [ formDef2 ],  // this works only once like: Ext.create('App.view.Form')
+  // items: [ formDef2 ],  // this works only once like: Ext.create('App.view.Form')
+  // items: [ 'App.view.Form' ],  // this does not work at all
   buttonAlign: 'center',
   buttons: [
     { text: 'Ok',
