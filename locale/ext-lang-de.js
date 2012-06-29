@@ -75,6 +75,8 @@ Ext.onReady(function() {
         Ext.Date.getShortDayName = function(day) {
             return Ext.Date.dayNames[day].substring(0, 3);
         };
+
+        Ext.Date.defaultFormat = 'd.m.Y';
     }
     if (Ext.MessageBox) {
         Ext.MessageBox.buttonText = {
@@ -168,7 +170,8 @@ Ext.onReady(function() {
         maxText: "Das Datum in diesem Feld muss vor dem {0} liegen",
         invalidText: "{0} ist kein gültiges Datum - es muss im Format {1} eingegeben werden",
         format: "d.m.Y",
-        altFormats: "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j"
+        altFormats: "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j|Y-m-d",
+        startDay: 1
     });
 
     Ext.define("Ext.locale.de.form.field.ComboBox", {
