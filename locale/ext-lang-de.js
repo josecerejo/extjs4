@@ -92,6 +92,28 @@ Ext.onReady(function() {
         Ext.MessageBox.msgButtons['no'].text = Ext.MessageBox.buttonText.no;
     }
 
+    /* has no effect
+    Ext.define("Ext.locale.de.window.MessageBox", {
+        override: "Ext.window.MessageBox",
+        buttonText = {
+            ok: "OK",
+            cancel: "Abbrechen",
+            yes: "Ja",
+            no: "Nein"
+        };
+    });
+    */
+    // see <http://www.sencha.com/forum/showthread.php?245808-Problem-with-button-localization-by-MessageBox-component-%28EXTJSIV-3909%29>
+    // reuse l10n strings from Ext.MessageBox
+    if (Ext.window.MessageBox) {
+        Ext.window.MessageBox.prototype.buttonText = {
+            ok : Ext.MessageBox.buttonText.ok,
+            cancel : Ext.MessageBox.buttonText.cancel,
+            yes : Ext.MessageBox.buttonText.yes,
+            no : Ext.MessageBox.buttonText.no
+        };
+    }
+
     if (exists('Ext.util.Format')) {
         Ext.util.Format.__number = Ext.util.Format.number;
         Ext.util.Format.number = function(v, format) {
@@ -168,7 +190,7 @@ Ext.onReady(function() {
         maxText: "Das Datum in diesem Feld muss vor dem {0} liegen",
         invalidText: "{0} ist kein gültiges Datum - es muss im Format {1} eingegeben werden",
         format: "d.m.Y",
-        altFormats: "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j"
+        altFormats: "j.n.Y|j.n.y|j.n.|j.|j/n/Y|j/n/y|j-n-y|j-n-Y|j/n|j-n|dm|dmy|dmY|j|Y-n-j|Y-m-d"
     });
 
     Ext.define("Ext.locale.de.form.field.ComboBox", {
