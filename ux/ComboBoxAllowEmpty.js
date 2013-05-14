@@ -39,7 +39,7 @@ Ext.override( Ext.form.field.ComboBox, {
                 } else {
                     // if value is '' and allowBlank
                     if (me.allowBlank &&
-                        (value === '' || value === ' ' || value === null)) {
+                        (value === '' || value === null)) {
                       me.setValue('');
                     }
                     else {
