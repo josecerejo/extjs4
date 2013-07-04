@@ -21,7 +21,7 @@ Ext.override( Ext.form.field.ComboBox, {
     assertValue: function() {
         var me = this,
             value = me.getRawValue(),
-            rec;
+            rec, currentValue;
 
         if (me.forceSelection) {
             if (me.multiSelect) {
@@ -35,9 +35,15 @@ Ext.override( Ext.form.field.ComboBox, {
                 // if it does not match a record then revert to the most recent selection.
                 rec = me.findRecordByDisplay(value);
                 if (rec) {
-                    me.select(rec);
+                    currentValue = me.value;
+                    // Prevent an issue where we have duplicate display values with
+                    // different underlying values.
+                    if (!me.findRecordByValue(currentValue)) {
+                        me.select(rec, true);
+                    }
                 } else {
-                    // if value is '' and allowBlank
+                    // if value is '' or null and blank is allowed
+                    // we do not use lastSelection but set to empty string
                     if (me.allowBlank &&
                         (value === '' || value === null)) {
                       me.setValue('');
