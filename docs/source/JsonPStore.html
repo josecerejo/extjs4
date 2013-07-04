@@ -23,7 +23,6 @@
  * &lt;p&gt;A store configuration would be something like:&lt;pre&gt;&lt;code&gt;
 var store = new Ext.data.JsonPStore({
     // store configs
-    autoDestroy: true,
     storeId: 'myStore',
 
     // proxy configs
@@ -56,8 +55,8 @@ Ext.define('Ext.data.JsonPStore', {
         'Ext.data.reader.Json'
     ],
 
-    constructor: function(config) {
-        config = Ext.apply({
+<span id='Ext-data-JsonPStore-method-constructor'>    constructor: function(config) {
+</span>        config = Ext.apply({
             proxy: {
                 type: 'jsonp',
                 reader: 'json'

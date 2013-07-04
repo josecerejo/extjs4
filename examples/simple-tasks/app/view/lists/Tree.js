@@ -43,11 +43,11 @@ Ext.define('SimpleTasks.view.lists.Tree', {
     ],
 
     viewConfig: {
-            plugins: {
-                ptype: 'tasksdragdrop',
-                dragText: 'Drag to reorder',
-                ddGroup: 'task'
-            }
+        plugins: {
+            ptype: 'tasksdragdrop',
+            dragText: 'Drag to reorder',
+            ddGroup: 'task'
+        }
     },
 
     initComponent: function() {
@@ -67,7 +67,8 @@ Ext.define('SimpleTasks.view.lists.Tree', {
                 flex: 1,
                 editor: {
                     xtype: 'textfield',
-                    selectOnFocus: true
+                    selectOnFocus: true,
+                    allowOnlyWhitespace: false
                 },
                 renderer: Ext.bind(me.renderName, me)
             },

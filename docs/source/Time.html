@@ -16,10 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-chart-axis-Time'>/**
-</span> * @class Ext.chart.axis.Time
- * @extends Ext.chart.axis.Axis
- *
- * A type of axis whose units are measured in time values. Use this axis
+</span> * A type of axis whose units are measured in time values. Use this axis
  * for listing dates that you will want to group or dynamically change.
  * If you just want to display dates as categories then use the
  * Category class for axis instead.
@@ -32,8 +29,6 @@
  *         fields: 'date',
  *         title: 'Day',
  *         dateFormat: 'M d',
- *         groupBy: 'year,month,day',
- *         aggregateOp: 'sum',
  *
  *         constrain: true,
  *         fromDate: new Date('1/1/11'),
@@ -57,6 +52,8 @@ Ext.define('Ext.chart.axis.Time', {
 
     alternateClassName: 'Ext.chart.TimeAxis',
 
+<span id='Ext-chart-axis-Time-property-type'>    type: 'Time',
+</span>
     alias: 'axis.time',
 
     uses: ['Ext.data.Store'],
@@ -82,9 +79,19 @@ Ext.define('Ext.chart.axis.Time', {
     toDate: false,
 
 <span id='Ext-chart-axis-Time-cfg-step'>    /**
-</span>     * @cfg {Array/Boolean} step
-     * An array with two components: The first is the unit of the step (day, month, year, etc). The second one is the number of units for the step (1, 2, etc.).
-     * Default's [Ext.Date.DAY, 1]. If this is specified, {@link #steps} config is omitted.
+</span>     * @cfg {Array} step
+     * An array with two components: The first is the unit of the step (day, month, year, etc). The second one is a number.
+     * If the number is an integer, it represents the number of units for the step ([Ext.Date.DAY, 2] means &quot;Every other day&quot;).
+     * If the number is a fraction, it represents the number of steps per unit ([Ext.Date.DAY, 1/2] means &quot;Twice a day&quot;).
+     * If the unit is the month, the steps may be adjusted depending on the month. For instance [Ext.Date.MONTH, 1/3], which means &quot;Three times a month&quot;,
+     * generates steps on the 1st, the 10th and the 20th of every month regardless of whether a month has 28 days or 31 days. The steps are generated
+     * as follows:
+     * - [Ext.Date.MONTH, n]: on the current date every 'n' months, maxed to the number of days in the month.
+     * - [Ext.Date.MONTH, 1/2]: on the 1st and 15th of every month.
+     * - [Ext.Date.MONTH, 1/3]: on the 1st, 10th and 20th of every month.
+     * - [Ext.Date.MONTH, 1/4]: on the 1st, 8th, 15th and 22nd of every month.
+     *
+     * Defaults to: [Ext.Date.DAY, 1].
      */
     step: [Ext.Date.DAY, 1],
 
@@ -92,12 +99,11 @@ Ext.define('Ext.chart.axis.Time', {
 </span>     * @cfg {Boolean} constrain
      * If true, the values of the chart will be rendered only if they belong between the fromDate and toDate.
      * If false, the time axis will adapt to the new values by adding/removing steps.
-     * Default's false.
      */
     constrain: false,
 
-    constructor: function (config) {
-        var me = this, label, f, df;
+<span id='Ext-chart-axis-Time-method-constructor'>    constructor: function (config) {
+</span>        var me = this, label, f, df;
         me.callParent([config]);
         label = me.label || {};
         df = this.dateFormat;
@@ -116,8 +122,8 @@ Ext.define('Ext.chart.axis.Time', {
         }
     },
 
-    // Before rendering, set current default step count to be number of records.
-    processView: function () {
+<span id='Ext-chart-axis-Time-method-processView'>    // Before rendering, set current default step count to be number of records.
+</span>    processView: function () {
         var me = this;
         if (me.fromDate) {
             me.minimum = +me.fromDate;
@@ -130,8 +136,8 @@ Ext.define('Ext.chart.axis.Time', {
         }
      },
 
-    // @private modifies the store and creates the labels for the axes.
-    calcEnds: function() {
+<span id='Ext-chart-axis-Time-method-calcEnds'>    // @private modifies the store and creates the labels for the axes.
+</span>    calcEnds: function() {
         var me = this, range, step = me.step;
         if (step) {
             range = me.getRange();
@@ -142,7 +148,6 @@ Ext.define('Ext.chart.axis.Time', {
             if (me.maximum) {
                 range.to = me.maximum;
             }
-            range.step = (range.to - range.from) / range.steps;
             return range;
         } else {
             return me.callParent(arguments);

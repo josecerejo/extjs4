@@ -27,12 +27,19 @@ Ext.define('Ext.data.JsonP', {
 
     singleton: true,
 
-    statics: {
-        requestCount: 0,
-        requests: {}
-    },
-
     /* End Definitions */
+
+<span id='Ext-data-JsonP-property-requestCount'>    /**
+</span>     * Number of requests done so far.
+     * @private
+     */
+    requestCount: 0,
+
+<span id='Ext-data-JsonP-property-requests'>    /**
+</span>     * Hash of pending requests.
+     * @private
+     */
+    requests: {},
 
 <span id='Ext-data-JsonP-property-timeout'>    /**
 </span>     * @property timeout
@@ -91,7 +98,7 @@ Ext.define('Ext.data.JsonP', {
      * &lt;/ul&gt;
      * @return {Object} request An object containing the request details.
      */
-    request: function(options){
+    request: function(options) {
         options = Ext.apply({}, options);
 
         //&lt;debug&gt;
@@ -103,7 +110,7 @@ Ext.define('Ext.data.JsonP', {
         var me = this,
             disableCaching = Ext.isDefined(options.disableCaching) ? options.disableCaching : me.disableCaching,
             cacheParam = options.disableCachingParam || me.disableCachingParam,
-            id = ++me.statics().requestCount,
+            id = ++me.requestCount,
             callbackName = options.callbackName || 'callback' + id,
             callbackKey = options.callbackKey || me.callbackKey,
             timeout = Ext.isDefined(options.timeout) ? options.timeout : me.timeout,
@@ -113,14 +120,17 @@ Ext.define('Ext.data.JsonP', {
             request,
             script;
 
-        params[callbackKey] = name + '.data.JsonP.' + callbackName;
-        if (disableCaching) {
-            params[cacheParam] = new Date().getTime();
-        }
 
+        // Add cachebuster param unless it has already been done
+        if (disableCaching &amp;&amp; !params[cacheParam]) {
+            params[cacheParam] = Ext.Date.now();
+        }
+        options.params = params;
+
+        params[callbackKey] = name + '.data.JsonP.' + callbackName;
         script = me.createScript(url, params, options);
 
-        me.statics().requests[id] = request = {
+        me.requests[id] = request = {
             url: url,
             params: params,
             script: script,
@@ -150,7 +160,7 @@ Ext.define('Ext.data.JsonP', {
      */
     abort: function(request){
         var me = this,
-            requests = me.statics().requests,
+            requests = me.requests,
             key;
 
         if (request) {
@@ -229,7 +239,7 @@ Ext.define('Ext.data.JsonP', {
             clearTimeout(request.timeout);
         }
         delete this[request.callbackName];
-        delete this.statics().requests[request.id];
+        delete this.requests[request.id];
         this.cleanupErrorHandling(request);
         Ext.fly(request.script).remove();
 
@@ -240,6 +250,7 @@ Ext.define('Ext.data.JsonP', {
             Ext.callback(request.success, request.scope, [result]);
         }
         Ext.callback(request.callback, request.scope, [success, result, request.errorType]);
+        Ext.EventManager.idleEvent.fire();
     },
 
 <span id='Ext-data-JsonP-method-createScript'>    /**

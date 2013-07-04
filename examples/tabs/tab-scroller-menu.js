@@ -13,7 +13,8 @@ Ext.onReady(function() {
     // enable the tabTip config below
     Ext.tip.QuickTipManager.init();
 
-    var win = Ext.createWidget('window', {
+    var win = Ext.widget('window', {
+        constrain: true,
         height: 400,
         width: 600,
         layout: 'fit',

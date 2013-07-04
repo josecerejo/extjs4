@@ -22,7 +22,7 @@ Ext.onReady(function(){
             
                 /* Language chooser combobox  */
                 var store = Ext.create('Ext.data.ArrayStore', {
-                    fields: ['code', 'language', 'charset'],
+                    fields: ['code', 'language'],
                     data : Ext.exampledata.languages // from languages.js
                 });
                 
@@ -37,7 +37,7 @@ Ext.onReady(function(){
                         select: {
                             fn: function(cb, records) {
                                 var record = records[0];
-                                window.location.search = Ext.urlEncode({"lang":record.get("code"),"charset":record.get("charset")});
+                                window.location.search = Ext.urlEncode({"lang":record.get("code")});
                             },
                             scope: this
                         }
@@ -60,8 +60,7 @@ Ext.onReady(function(){
                         url,
                         this.onSuccess,
                         this.onFailure,
-                        this,
-                        params.charset);
+                        this);
                 } else {
                     this.setupDemo();
                 }
@@ -74,6 +73,10 @@ Ext.onReady(function(){
                 this.setupDemo();
             },
             setupDemo: function() {
+                // Grid needs to be this wide to handle the largest language case for the toolbar.
+                // In this case, it's Russian.
+                
+                var width = 500;
                 /* Email field */
                 Ext.create('Ext.FormPanel', {
                     renderTo: 'emailfield',
@@ -81,10 +84,10 @@ Ext.onReady(function(){
                     frame: true,
                     title: 'Email Field',
                     bodyStyle: 'padding:5px 5px 0',
-                    width: 380,
+                    width: width,
                     defaults: {
                         msgTarget: 'side',
-                        width: 340
+                        width: width - 40
                     },
                     defaultType: 'textfield',
                     items: [{
@@ -101,10 +104,10 @@ Ext.onReady(function(){
                     frame: true,
                     title: 'Datepicker',
                     bodyStyle: 'padding:5px 5px 0',
-                    width: 380,
+                    width: width,
                     defaults: {
                         msgTarget: 'side',
-                        width: 340
+                        width: width - 40
                     },
                     defaultType: 'datefield',
                     items: [{
@@ -130,7 +133,7 @@ Ext.onReady(function(){
                              
                  Ext.create('Ext.grid.Panel', {
                      renderTo: 'grid',
-                     width: 380,
+                     width: width,
                      height: 203,
                      title:'Month Browser',
                      columns:[{

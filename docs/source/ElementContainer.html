@@ -33,7 +33,7 @@
  *          ],
  *          
  *          renderTpl: [
- *              '&amp;lt;div id=&quot;{id}-bodyEl&quot;&amp;gt;&amp;lt;/div&amp;gt;'
+ *              '&lt;div id=&quot;{id}-bodyEl&quot;&gt;&lt;/div&gt;'
  *          ],
  *          
  *          // ...
@@ -88,9 +88,9 @@
  *          ],
  *          
  *          renderTpl: [
- *              '&amp;lt;div id=&quot;{id}-bodyEl&quot;&amp;gt;'
- *                  '&amp;lt;div id=&quot;{id}-innerEl&quot;&amp;gt;&amp;lt;/div&amp;gt;'
- *              '&amp;lt;/div&amp;gt;'
+ *              '&lt;div id=&quot;{id}-bodyEl&quot;&gt;'
+ *                  '&lt;div id=&quot;{id}-innerEl&quot;&gt;&lt;/div&gt;'
+ *              '&lt;/div&gt;'
  *          ],
  *          
  *          // ...
@@ -105,15 +105,15 @@
  */
 Ext.define('Ext.util.ElementContainer', {
 
-    childEls: [
-        // empty - this solves a couple problems:
+<span id='Ext-util-ElementContainer-property-childEls'>    childEls: [
+</span>        // empty - this solves a couple problems:
         //  1. It ensures that all classes have a childEls (avoid null ptr)
         //  2. It prevents mixins from smashing on their own childEls (these are gathered
         //      specifically)
     ],
 
-    constructor: function () {
-        var me = this,
+<span id='Ext-util-ElementContainer-method-constructor'>    constructor: function () {
+</span>        var me = this,
             childEls;
 
         // if we have configured childEls, we need to merge them with those from this
@@ -126,8 +126,8 @@ Ext.define('Ext.util.ElementContainer', {
         }
     },
 
-    destroy: function () {
-        var me = this,
+<span id='Ext-util-ElementContainer-method-destroy'>    destroy: function () {
+</span>        var me = this,
             childEls = me.getChildEls(),
             child, childName, i, k;
 
@@ -146,7 +146,7 @@ Ext.define('Ext.util.ElementContainer', {
     },
 
 <span id='Ext-util-ElementContainer-method-addChildEls'>    /**
-</span>     * Adds each argument passed to this method to the {@link #childEls} array.
+</span>     * Adds each argument passed to this method to the {@link Ext.AbstractComponent#cfg-childEls childEls} array.
      */
     addChildEls: function () {
         var me = this,
@@ -195,8 +195,8 @@ Ext.define('Ext.util.ElementContainer', {
         }
     },
 
-    getChildEls: function () {
-        var me = this,
+<span id='Ext-util-ElementContainer-method-getChildEls'>    getChildEls: function () {
+</span>        var me = this,
             self;
 
         // If an instance has its own childEls, that is the complete set:
@@ -210,8 +210,8 @@ Ext.define('Ext.util.ElementContainer', {
         return self.$childEls || me.getClassChildEls(self);
     },
 
-    getClassChildEls: function (cls) {
-        var me = this,
+<span id='Ext-util-ElementContainer-method-getClassChildEls'>    getClassChildEls: function (cls) {
+</span>        var me = this,
             result = cls.$childEls,
             childEls, i, length, forked, mixin, mixins, name, parts, proto, supr, superMixins;
 
@@ -262,8 +262,8 @@ Ext.define('Ext.util.ElementContainer', {
         return result;
     },
 
-    prune: function (childEls, shared) {
-        var index = childEls.length,
+<span id='Ext-util-ElementContainer-method-prune'>    prune: function (childEls, shared) {
+</span>        var index = childEls.length,
             map = {},
             name;
 

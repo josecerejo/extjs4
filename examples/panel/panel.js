@@ -83,12 +83,13 @@ Ext.onReady(function() {
     },{
         title : 'Framed panel as child',
         width : 300,
-        height: 100,
+        manageHeight: false,
         html  : null,
         layout: 'fit',
         items: [
             {
                 xtype: 'panel',
+                manageHeight: false,
                 title: 'Framed panel',
                 html : '123',
                 frame: true
@@ -97,13 +98,14 @@ Ext.onReady(function() {
     },{
         title : 'Framed panel with normal child',
         width : 300,
-        height: 100,
+        manageHeight: false,
         html  : null,
         frame: true,
         layout: 'fit',
         items: [
             {
                 xtype: 'panel',
+                manageHeight: false,
                 title: 'Non-framed child',
                 html : 'Hello'
             }
@@ -119,7 +121,7 @@ Ext.onReady(function() {
     Ext.each(configs, function(config) {
         var element = Ext.getBody().createChild({cls: 'panel-container'});
         
-        Ext.createWidget('panel', Ext.applyIf(config, {
+        Ext.widget('panel', Ext.applyIf(config, {
             renderTo: element,
             bodyPadding: 7
         }));

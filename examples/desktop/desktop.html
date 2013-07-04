@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>ExtTop - Desktop Sample App</title>
 
-    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
     <link rel="stylesheet" type="text/css" href="css/desktop.css" />
 
     <!-- GC -->
 
-
-    <script type="text/javascript" src="../../ext.js"></script>
-    <script type="text/javascript" src="all-classes.js"></script>
-
+    <!-- <x-compile> -->
+    <!-- <x-bootstrap> -->
+    <script type="text/javascript" src="../../examples/shared/include-ext.js"></script>
+    <script type="text/javascript" src="../../examples/shared/options-toolbar.js"></script>
+    <!-- </x-bootstrap> -->
     <script type="text/javascript">
         Ext.Loader.setPath({
             'Ext.ux.desktop': 'js',
@@ -26,6 +26,7 @@
             myDesktopApp = new MyDesktop.App();
         });
     </script>
+    <!-- </x-compile> -->
 </head>
 
 <body>
